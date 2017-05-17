@@ -1,0 +1,86 @@
+<html>
+<html>
+<head>
+  <title>Interpolation Approximation</title>
+  <script type="text/javascript" async
+  src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.0/MathJax.js?config=TeX-MML-AM_CHTML">
+</script>
+<script type="text/javascript">
+window.onload = function(){
+
+  if(typeof MathJax !== 'undefined'){
+      MathJax.Hub.Config({
+      tex2jax: {inlineMath: [["$&","&$"]]}
+    });
+    }else{
+      console.log('mathjax didnt load')
+    }
+  }
+</script>
+</head>
+<body>
+  <p>
+    Assume the interval 0 to 1 has been evenly divided N times so
+    $&\Delta x = \frac{1}{N}&$.
+  </p>
+  <p>
+    The integral
+    $&\int_0^1 f(x)g(x) dx =
+    \Sigma_{l=0}^{N-1}
+      \int_{l\Delta x}^{(l+1)\Delta x} f(x)g(x) dx
+    &$
+  </p>
+  <p>
+    Note that
+    $&
+      \Sigma_{l=0}^{N-1}
+      \int_{l\Delta x}^{(l+1)\Delta x} f(x)g(x) dx
+      \neq
+      \Sigma_{l=0}^{N-1}
+      (\int_{l\Delta x}^{(l+1)\Delta x} f(x) dx)
+      (\int_{l\Delta x}^{(l+1)\Delta x} g(x) dx)
+    &$
+  </p>
+  <p>
+    Assuming f and g have taylor expansions, they can be written as
+    $&f = \Sigma_{j=0}^\infty \alpha_j (x-x_0)^j&$ and
+    $&g = \Sigma_{k=0}^\infty \beta_k (x-x_0)^k&$ where
+    $&\alpha_j = \frac{f^{(j)}}{j!}|_{x_0}&$ and
+    $&\beta_k = \frac{g^{(k)}}{k!}|_{x_0}&$
+  </p>
+  <p>
+    if $&x_0=l\Delta x&$ then
+    $&
+    \int_{l\Delta x}^{(l+1)\Delta x} f(x) dx=
+    \int_{l\Delta x}^{(l+1)\Delta x} \Sigma_{j=0}^\infty \alpha_j (x-x_0)^j dx=
+    \alpha_0 x|_{l\Delta x}^{(l+1)\Delta x}+
+    \Sigma_{j=1}^\infty \frac{\alpha_j}{j+1} (x-x_0)^{j+1}|_{l\Delta x}^{(l+1)\Delta x}
+    =
+    \alpha_0\Delta x + \Sigma_{j=1}^\infty \frac{\alpha_j}{j+1} (\Delta x)^{j+1}
+    &$
+  </p>
+  <p>
+    This means
+    $&
+      (\int_{l\Delta x}^{(l+1)\Delta x} f(x) dx)
+      (\int_{l\Delta x}^{(l+1)\Delta x} g(x) dx)=
+      \alpha_0\beta_0\Delta x^2 + O(\Delta x^3)\approx f_{l\Delta x}g_{l\Delta x} \Delta x^2
+    &$
+  </p>
+  <p>
+    Meanwhile
+    $&fg = (\Sigma_{j=0}^\infty \alpha_j (x-x_0)^j)(\Sigma_{k=0}^\infty \beta_k (x-x_0)^k) =
+    \alpha_0\beta_0(x-x_0)^0 + (\alpha_0\beta_1+\alpha_1\beta_0)(x-x_0)^1 + O((x-x_0)^3)
+    &$
+  </p>
+  <p>
+    And
+    $&
+    \int_{l\Delta x}^{(l+1)\Delta x} f g dx
+    =
+    \alpha_0\beta_0 \Delta x + \frac{1}{2}(\alpha_0\beta_1+\alpha_1\beta_0)\Delta x^2 + O(\Delta x^3)
+    &$
+  </p>
+<!-- $&&$ -->
+</body>
+</html>
